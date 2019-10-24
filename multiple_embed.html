@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+    <title>Multiple controllable YouTube iframe embeds</title>
+    <script src="http://www.youtube.com/player_api"></script>
+  </head>
+
+  <body>
+    <iframe
+      style="position: relative; width: 319px; height: 280px;  border: 1px solid black; "
+      src="http://www.youtube.com/embed/bKZbvluHcNo?enablejsapi=1"
+      id="widget1"
+    ></iframe>
+    <iframe
+      style="position: relative; width: 319px; height: 280px;  border: 1px solid black; "
+      src="http://www.youtube.com/embed/OsLap6ZNNQo?enablejsapi=1"
+      id="widget2"
+    ></iframe>
+  </body>
+  <script>
+    let player1;
+    let player2;
+    function onYouTubeIframeAPIReady() {
+      player1 = new YT.Player("widget1", {
+        events: {
+          onStateChange: onPlayerStateChange
+        }
+      });
+      player2 = new YT.Player("widget2", {
+        events: {
+          onStateChange: onPlayerStateChange
+        }
+      });
+    }
+    function onPlayerStateChange(event) {
+      const playerStatus = event.data;
+      const target = event.target;
+      console.log(target.getVideoData().title);
+      if (playerStatus == -1) {
+        console.log("unstart");
+      } else if (playerStatus == 0) {
+        console.log("end");
+      } else if (playerStatus == 1) {
+        console.log("playing");
+      } else if (playerStatus == 2) {
+        console.log("pause");
+      } else if (playerStatus == 3) {
+        console.log("buffering");
+      } else if (playerStatus == 5) {
+        console.log("video cue");
+      }
+    }
+  </script>
+</html>
