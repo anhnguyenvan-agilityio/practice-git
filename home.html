@@ -6,38 +6,37 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
-    <script>
-      function setCookie(cname, cvalue, exdays) {
-        var d = new Date();
-        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-        var expires = "expires=" + d.toGMTString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-      }
-
-      function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(";");
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == " ") {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return "";
-      }
-    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
-    <button onclick="setCookie('id', uuidv4(), 1)">Create Cookies</button>
-    <p id="myCookies">N/A</p>
+    <input type="text" name="" id="" />
+    <p id="lb"></p>
   </body>
   <script>
-    const valueCookies = getCookie("id");
-    console.log("==>", valueCookies);
-    document.getElementById("myCookies").innerHTML = valueCookies;
+    function test() {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          document.getElementById("lb").innerHTML = "here";
+          resolve();
+        }, 3000);
+      });
+    }
+    (async function() {
+      axios
+        .get("https://jsonplaceholder.typicode.com/posts/42")
+        .then(function(response) {
+          // handle success
+          console.log(response.data);
+        })
+        .catch(function(error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function() {
+          // always executed
+        });
+      await test();
+      console.log("hi");
+    })();
   </script>
 </html>
