@@ -3,8 +3,8 @@
 const AWS = require("aws-sdk");
 const aws_region = "us-east-1";
 
-const accessKeyId = "AKIAUC5HZBOFNPTT7SXU";
-const secretAccessKey = "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";
+const accessKeyId = "";
+const secretAccessKey = "";
 
 const awsConfig = {
   region: aws_region,
